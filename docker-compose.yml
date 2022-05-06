@@ -1,0 +1,70 @@
+version: "3"
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  ### Apache ################################################
+
+  ims-webserver:
+    build:
+      context: ./bin/webserver
+      args:
+        - INSTALL_NODE=${WORKSPACE_INSTALL_NODE}
+        - NPM_REGISTRY=${WORKSPACE_NPM_REGISTRY}
+        - COMPOSER_GLOBAL_INSTALL=${WORKSPACE_COMPOSER_GLOBAL_INSTALL}
+        - COMPOSER_REPO_PACKAGIST=${WORKSPACE_COMPOSER_REPO_PACKAGIST}
+        - INSTALL_WORKSPACE_SSH=${WORKSPACE_INSTALL_WORKSPACE_SSH}
+        - INSTALL_LARAVEL_INSTALLER=${WORKSPACE_INSTALL_LARAVEL_INSTALLER}
+        - PUID=${WORKSPACE_PUID}
+        - PGID=${WORKSPACE_PGID}
+        - NODE_VERSION=${WORKSPACE_NODE_VERSION}
+    container_name: "ims-webserver"
+    restart: "always"
+    networks:
+      - app-network
+    ports:
+      - "80:80"
+    links:
+      - ims-mysql
+    volumes:
+      - ${DOCUMENT_ROOT-./www}:/var/www/html
+      - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
+      - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
+      - ${SSL_VOLUME-./config/ssl}:/var/imported/ssl
+      - ${LOG_DIR-./logs/apache2}:/var/log/apache2
+
+  ### MySQL ################################################
+
+  ims-mysql:
+    image: mariadb
+    container_name: "ims-mysql"
+    command: mysqld --sql_mode=""
+    restart: "always"
+    networks:
+      - app-network
+    ports:
+      - "3306:3306"
+    volumes:
+      - ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+
+  ### phpMyAdmin ################################################
+
+  ims-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "ims-phpmyadmin"
+    environment:
+      PMA_HOST: ims-mysql
+      PMA_PORT: 3306
+    networks:
+      - app-network
+    ports:
+      - "8080:80"
+    volumes:
+      - /sessions
