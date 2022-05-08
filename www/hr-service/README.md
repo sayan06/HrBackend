@@ -1,13 +1,13 @@
-**IMS Service**
+**HR Service**
 
 # Development Setup:
 
 ## 1. Create a new MySQL database and user. For example:
 
-    CREATE DATABASE ims;
-    GRANT ALL PRIVILEGES ON ims.* TO 'ims'@'%' IDENTIFIED BY 'password';
+    CREATE DATABASE hr;
+    GRANT ALL PRIVILEGES ON hr.* TO 'hr'@'%' IDENTIFIED BY 'password';
 
-    This will create a new database named ims and a MySQL user named ims with a password of password.
+    This will create a new database named hr and a MySQL user named hr with a password of password.
 
 ## 2. Install dependencies:
     
