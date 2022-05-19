@@ -29,6 +29,7 @@ final class AuthController extends ApiController
             'title' => ['bail', 'string', 'filled', 'max:30', 'nullable'],
             'name' => ['string', 'max:50', 'filled', 'nullable', 'required'],
             'password' => ['bail', 'string', 'filled', 'min:6', 'max:30', 'nullable', 'required'],
+            'confirm_password' => ['bail', 'string', 'filled', 'min:6', 'max:30', 'nullable', 'same:password'],
             'role_id' => ['bail', 'integer', 'exists:roles,id', 'nullable'],
             'phone' => ['string', 'filled', 'min:10', 'max:30', 'nullable'],
         ]);

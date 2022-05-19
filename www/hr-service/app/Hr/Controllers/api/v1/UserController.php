@@ -53,6 +53,7 @@ final class UserController extends ApiController
             'email' => ['bail', 'email', 'filled', 'max:50', 'nullable', 'unique:users,email,' . $user->id],
             'name' => ['string', 'max:50', 'filled', 'nullable'],
             'password' => ['bail', 'string', 'filled', 'min:6', 'max:30', 'nullable'],
+            'confirm_password' => ['bail', 'string', 'filled', 'min:6', 'max:30', 'nullable', 'same:password'],
             'phone' => ['string', 'filled', 'min:10', 'max:30', 'nullable'],
             'role_id' => ['bail', 'integer', 'exists:roles,id', 'nullable'],
             'title' => ['bail', 'string', 'filled', 'max:30', 'nullable'],

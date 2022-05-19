@@ -2,7 +2,7 @@
 
 namespace App\Hr\Services;
 
-use App\Hr\Models\User as ModelsUser;
+use App\Hr\Models\User;
 use App\Hr\Models\Role;
 use App\Hr\Repositories\Contracts\UserRepositoryInterface;
 use App\Hr\Services\Contracts\UserServiceInterface;
@@ -19,7 +19,7 @@ final class UserService implements UserServiceInterface
         $this->userRepo = $userRepo;
     }
 
-    public function createUser(array $attributes): ModelsUser
+    public function createUser(array $attributes): User
     {
         try {
             DB::beginTransaction();
