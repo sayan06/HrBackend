@@ -30,7 +30,7 @@
 - From your code editor navigate to `www/hr-service/storage/logs` and create `laravel.log` file if not exists.
 - Create a .env file inside `www/hr-service` and copy the contents of .env.example in it.
 - Make the following changes inside the .env
-    `DB_HOST=ims-mysql`
+    `DB_HOST=hr-mysql`
     `DB_DATABASE=hr_db`
     `DB_PASSWORD=password`
 - Go back to the terminal(where composer install ran) and run command `php artisan migrate`.
