@@ -3,6 +3,7 @@
 namespace App\Hr\Controllers\api\v1;
 
 use App\Hr\Controllers\api\ApiController;
+use App\Hr\Mail\DefaultMailable;
 use App\Hr\Models\Role;
 use App\Hr\Models\User;
 use App\Hr\Resources\UserResource;
@@ -10,6 +11,8 @@ use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 final class AuthController extends ApiController
@@ -39,7 +42,7 @@ final class AuthController extends ApiController
 
             if ($role->isGuest()) {
                 throw new BadRequestException('Guest role cannot be assigned');
-           }
+            }
         }
 
         return $this->respondCreated('User created successfully', [
@@ -91,6 +94,47 @@ final class AuthController extends ApiController
         return $this->respondSuccess('New token created', [
             'user' => new UserResource($user),
             'token' => $this->userService->refreshAuthToken($user),
+        ]);
+    }
+
+    public function requestOtp(Request $request)
+    {
+        $otp = rand(1000, 9999);
+        $user = User::where('email', '=', $request->email)->update(['otp' => $otp]);
+
+        if (!$user) {
+            throw new UnauthorizedException('Invalid Email');
+        }
+
+        $details = [
+            'title' => 'Testing Application OTP',
+            'body' => 'Your OTP is : ' . $otp,
+        ];
+
+        Mail::to($request->email)->send(new DefaultMailable($details));
+
+        return $this->respond('OTP sent successfully');
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $user = User::where([
+            ['email', '=', $request->email],
+            ['otp', '=', $request->otp],
+        ])->first();
+
+        if (!$user) {
+            throw new UnauthorizedException('Invalid Email or otp');
+        }
+
+        auth()->login($user, true);
+        $user->otp = null;
+        $user->email_verified_at = time();
+        $user->save();
+
+        return $this->respondSuccess('Login success', [
+            'user' => new UserResource($user),
+            'token' => $this->userService->createAuthToken($user),
         ]);
     }
 

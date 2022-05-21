@@ -28,6 +28,7 @@ class User extends Authenticatable
         'title',
         'phone',
         'disabled_at',
+        'email_verified_at',
     ];
 
     const SORTABLE = [

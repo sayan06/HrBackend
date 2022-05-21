@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('/auth/users/login', [AuthController::class, 'login']);
     Route::post('/auth/users/register', [AuthController::class, 'register']);
+    Route::post('/auth/users/request-otp', [AuthController::class, 'requestOtp']);
+    Route::post('/auth/users/verify-otp', [AuthController::class, 'verifyOtp']);
     Route::post('/forgot-password', [PasswordResetController::class, 'sendPasswordResetMail']);
     Route::post('/password-reset', [PasswordResetController::class, 'resetPasswordByToken']);
 });
