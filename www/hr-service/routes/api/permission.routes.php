@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/permissions', [PermissionController::class, 'getPermissions'])
         ->middleware('permission:list_permissions');
-

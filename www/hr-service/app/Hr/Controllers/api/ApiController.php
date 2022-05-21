@@ -54,8 +54,9 @@ abstract class ApiController extends Controller
 
     /**
      * Respond Json.
+     *
      * @param  array or object $data
-     * @param  array $headers
+     * @param  array  $headers
      * @return json
      */
     protected function respond($data, array $headers = [])
@@ -71,8 +72,9 @@ abstract class ApiController extends Controller
 
     /**
      * Get's a pagination collection directly or via resource and responds custom JSON.
+     *
      * @param  mixed collection
-     * @param  array $headers
+     * @param  array  $headers
      * @return json
      */
     protected function respondPaginated($paginatedCollection, array $headers = [])

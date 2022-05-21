@@ -2,7 +2,6 @@
 
 namespace App\Hr\Resources;
 
-use App\Hr\Resources\RoleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource

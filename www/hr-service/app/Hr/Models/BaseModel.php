@@ -26,7 +26,7 @@ class BaseModel extends Model
             call_user_func_array([$this, $value], [$validator, $data]);
         }
 
-        if (! $additionalRulesPassed) {
+        if (!$additionalRulesPassed) {
             $this->errors = $validator->errors();
 
             return false;
@@ -50,9 +50,8 @@ class BaseModel extends Model
      * Wrapper for Eloquent firstOrCreate with logic to ignore duplicate key
      * DB errors resulting from race conditions.
      *
-     * @param array $attributes The attributes to search on and insert.
-     * @param array $values The additional attributes to insert only.
-     *
+     * @param  array  $attributes The attributes to search on and insert.
+     * @param  array  $values The additional attributes to insert only.
      * @return Model
      */
     public static function firstOrInsert(array $attributes, array $values = null)

@@ -44,7 +44,7 @@ final class RoleController extends ApiController
         $sortableDto = new SortableDto($sortColumn, $sortOrder, Role::class);
         $filterableDto = new FilterableDto($filters, Role::class);
 
-        $roleCollection = $this->roleRepository->getMany($sortableDto, $filterableDto,$pageLimit);
+        $roleCollection = $this->roleRepository->getMany($sortableDto, $filterableDto, $pageLimit);
 
         return $this->respondPaginated(RoleResource::collection($roleCollection));
     }
@@ -71,7 +71,7 @@ final class RoleController extends ApiController
     {
         $rules = [
             'name' => 'string|max:200|unique:roles,name,' . $role->id,
-            'guard_name' => 'prohibited'
+            'guard_name' => 'prohibited',
         ];
 
         $request->validate($rules);

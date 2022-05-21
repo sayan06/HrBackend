@@ -11,7 +11,7 @@ trait Rest
      *
      * If the request URI contains '/api/v'.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return bool
      */
     protected function isApiCall(Request $request)

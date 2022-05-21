@@ -15,7 +15,7 @@ final class RoleRepository extends BaseRepository implements RoleRepositoryInter
         $this->model = Role::class;
     }
 
-    public function getMany(SortableDto $sortableDto, FilterableDto $filterableDto,int $pageLimit = 15): LengthAwarePaginator
+    public function getMany(SortableDto $sortableDto, FilterableDto $filterableDto, int $pageLimit = 15): LengthAwarePaginator
     {
         return Role::where($filterableDto->getFilters())
             ->orderBy($sortableDto->getColumn(), $sortableDto->getOrder())

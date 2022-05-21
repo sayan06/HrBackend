@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface MediaRepositoryInterface
 {
-    public function updateMediaDetails(Media $media, array  $attributes, array $mediaDetails): Media;
+    public function updateMediaDetails(Media $media, array $attributes, array $mediaDetails): Media;
 
-    public function updateMediaEntityDetails(Media $media, array  $attributes, array $mediaDetails): EntityMedia;
+    public function updateMediaEntityDetails(Media $media, array $attributes, array $mediaDetails): EntityMedia;
 
     public function getMediaItems(Media $media, array $attributes): Collection;
 

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface RoleRepositoryInterface
 {
-    public function getMany(SortableDto $sortableDto, FilterableDto $filterableDto,int $pageLimit = 15): LengthAwarePaginator;
+    public function getMany(SortableDto $sortableDto, FilterableDto $filterableDto, int $pageLimit = 15): LengthAwarePaginator;
 
     public function updateOne(Role $role, array $attributes): Role;
 }

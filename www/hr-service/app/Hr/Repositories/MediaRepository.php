@@ -14,7 +14,7 @@ final class MediaRepository extends BaseRepository implements MediaRepositoryInt
         $this->model = Media::class;
     }
 
-    public function updateMediaDetails(Media $media, array  $attributes, array $mediaDetails): Media
+    public function updateMediaDetails(Media $media, array $attributes, array $mediaDetails): Media
     {
         $media->name = data_get($mediaDetails, 'name');
         $media->path = data_get($mediaDetails, 'path');
@@ -26,7 +26,7 @@ final class MediaRepository extends BaseRepository implements MediaRepositoryInt
         return $media;
     }
 
-    public function updateMediaEntityDetails(Media $media, array  $attributes, array $mediaDetails): EntityMedia
+    public function updateMediaEntityDetails(Media $media, array $attributes, array $mediaDetails): EntityMedia
     {
         return tap(new EntityMedia(), function ($entityMedia) use ($attributes, $mediaDetails, $media) {
             $entityMedia->entity_id = data_get($attributes, 'entity_id');

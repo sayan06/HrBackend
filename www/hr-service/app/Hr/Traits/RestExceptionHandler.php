@@ -23,7 +23,7 @@ trait RestExceptionHandler
     /**
      * Creates a new JSON response based on exception type.
      *
-     * @param Throwable $th
+     * @param  Throwable  $th
      * @return \Illuminate\Http\JsonResponse
      */
     protected function getJsonResponseForException(Throwable $th)
@@ -57,8 +57,8 @@ trait RestExceptionHandler
     /**
      * Returns json response for generic bad request.
      *
-     * @param string $message
-     * @param int $statusCode
+     * @param  string  $message
+     * @param  int  $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
     protected function badRequest($message = 'Bad request!', $statusCode = 400)
@@ -69,8 +69,8 @@ trait RestExceptionHandler
     /**
      * Returns json response for Eloquent model not found exception.
      *
-     * @param string $message
-     * @param int $statusCode
+     * @param  string  $message
+     * @param  int  $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
     protected function modelNotFound($message = 'Model Not Found!', $statusCode = 404)
@@ -80,8 +80,9 @@ trait RestExceptionHandler
 
     /**
      * Returns json response for query exception.
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function queryException($message = 'Unable to execute the query!', $statusCode = 500)
@@ -91,8 +92,9 @@ trait RestExceptionHandler
 
     /**
      * Returns json response for HTTP method not allowed exception.
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function methodNotAllowed($message = 'Method Not Allowed!', $statusCode = 405)
@@ -102,8 +104,9 @@ trait RestExceptionHandler
 
     /**
      * [notFoundHttpRequest description].
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function notFoundHttpRequest($message = 'Endpoint not found!', $statusCode = 404)
@@ -113,8 +116,9 @@ trait RestExceptionHandler
 
     /**
      * [notAuthenticated description].
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function notAuthenticated($message = 'Unauthenticated!', $statusCode = 401)
@@ -124,8 +128,9 @@ trait RestExceptionHandler
 
     /**
      * [notAuthorized description].
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function notAuthorized($message = 'Unauthorized!', $statusCode = 403)
@@ -135,8 +140,9 @@ trait RestExceptionHandler
 
     /**
      * Returns json response for validation exception.
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function validationError(ValidationException $th, $message = 'Invalid parameters!', $statusCode = 400)
@@ -146,8 +152,9 @@ trait RestExceptionHandler
 
     /**
      * [fatalError description].
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function fatalError($message = 'Fatal Error!', $statusCode = 500)
@@ -157,8 +164,9 @@ trait RestExceptionHandler
 
     /**
      * [errorException description].
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function errorException($message = 'An unexpected error has occurred.', $statusCode = 500)
@@ -168,8 +176,9 @@ trait RestExceptionHandler
 
     /**
      * [businessRuleViolationException description].
+     *
      * @param  string  $message    [description]
-     * @param  int $statusCode [description]
+     * @param  int  $statusCode [description]
      * @return json
      */
     protected function businessRuleViolationException($message = 'Business Rule Violation', $statusCode = 400)
@@ -190,8 +199,8 @@ trait RestExceptionHandler
     /**
      * Returns json response.
      *
-     * @param array|null $payload
-     * @param int $statusCode
+     * @param  array|null  $payload
+     * @param  int  $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
     protected function jsonResponse(array $payload = null, $statusCode = 404)
@@ -204,7 +213,7 @@ trait RestExceptionHandler
     /**
      * Determines if the given exception is an Eloquent model not found.
      *
-     * @param Throwable $th
+     * @param  Throwable  $th
      * @return bool
      */
     protected function isModelNotFoundException(Throwable $th)
@@ -214,7 +223,8 @@ trait RestExceptionHandler
 
     /**
      * [isQueryException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isQueryException(Throwable $th)
@@ -224,7 +234,8 @@ trait RestExceptionHandler
 
     /**
      * [isValidationException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isValidationException(Throwable $th)
@@ -234,7 +245,8 @@ trait RestExceptionHandler
 
     /**
      * [isMethodNotAllowedHttpException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isMethodNotAllowedHttpException(Throwable $th)
@@ -244,7 +256,8 @@ trait RestExceptionHandler
 
     /**
      * [isNotFoundHttpException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isNotFoundHttpException(Throwable $th)
@@ -254,7 +267,8 @@ trait RestExceptionHandler
 
     /**
      * [isAuthenticationException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isAuthenticationException(Throwable $th)
@@ -264,7 +278,8 @@ trait RestExceptionHandler
 
     /**
      * [isFatalErrorException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isFatalErrorException(Throwable $th)
@@ -274,7 +289,8 @@ trait RestExceptionHandler
 
     /**
      * [isErrorException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isErrorException(Throwable $th)
@@ -284,7 +300,8 @@ trait RestExceptionHandler
 
     /**
      * [isBusinessRuleViolationException description].
-     * @param  Throwable $th [description]
+     *
+     * @param  Throwable  $th [description]
      * @return bool      [description]
      */
     protected function isBusinessRuleViolationException(Throwable $th)

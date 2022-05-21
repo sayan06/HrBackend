@@ -6,5 +6,5 @@ use App\Hr\Models\Role;
 
 interface RoleServiceInterface
 {
-    public function delete(Role $role):Role;
+    public function delete(Role $role): Role;
 }

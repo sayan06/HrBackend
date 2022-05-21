@@ -32,7 +32,6 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Throwable  $exception
-     *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $throwable)
@@ -49,7 +48,6 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Auth\AuthenticationException  $exception
-     *
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)

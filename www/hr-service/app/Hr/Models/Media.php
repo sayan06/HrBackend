@@ -2,7 +2,6 @@
 
 namespace App\Hr\Models;
 
-use App\Hr\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

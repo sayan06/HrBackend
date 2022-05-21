@@ -2,8 +2,8 @@
 
 namespace App\Hr\Services;
 
-use App\Hr\Models\User;
 use App\Hr\Models\Role;
+use App\Hr\Models\User;
 use App\Hr\Repositories\Contracts\UserRepositoryInterface;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Support\Facades\DB;

@@ -59,7 +59,7 @@ final class UserController extends ApiController
             'title' => ['bail', 'string', 'filled', 'max:30', 'nullable'],
         ]);
 
-        $authUser =  $request->user();
+        $authUser = $request->user();
 
         if ($request->user()->roles->first()->name === Role::ROLE_NAME_GUEST) {
             throw new BadRequestException('Guest are not allowed to update their profile.');
@@ -125,11 +125,11 @@ final class UserController extends ApiController
     public function changePassword(Request $request, User $user)
     {
         $request->validate([
-            'old_password' => ['bail', 'required','string', 'filled', 'min:6', 'max:30', 'nullable'],
+            'old_password' => ['bail', 'required', 'string', 'filled', 'min:6', 'max:30', 'nullable'],
             'new_password' => ['bail', 'required', 'string', 'filled', 'min:6', 'max:30', 'nullable'],
         ]);
 
-        $authUser =  $request->user();
+        $authUser = $request->user();
 
         if ($request->user()->roles->first()->name === Role::ROLE_NAME_GUEST) {
             throw new BadRequestException('Guest are not allowed to change their password.');
