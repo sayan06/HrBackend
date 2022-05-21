@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // TODO: redirect to our `ims-admin URL`
+    // TODO: redirect to our `hr-admin URL`
     return Redirect::away('http://google.com');
 });

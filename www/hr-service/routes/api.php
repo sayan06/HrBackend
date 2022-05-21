@@ -1,6 +1,7 @@
 <?php
 
 use App\Hr\Controllers\api\v1\AuthController;
+use App\Hr\Controllers\api\v1\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('/auth/users/login', [AuthController::class, 'login']);
     Route::post('/auth/users/register', [AuthController::class, 'register']);
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendPasswordResetMail']);
+    Route::post('/password-reset', [PasswordResetController::class, 'resetPasswordByToken']);
 });
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
