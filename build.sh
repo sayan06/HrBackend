@@ -16,14 +16,14 @@ fi
 
 if [ $MODE = $PROD ]; then
   echo "Running Production Containers"
-  docker-compose down && \ 
-  docker-compose build --force-rm --compress && \ 
-  docker-compose -f docker-compose.yml up -d
+  docker compose down && \
+  docker compose build --force-rm --compress && \
+  docker compose -f docker-compose.yml up -d
 elif [ $MODE = $DEV ]; then
   echo "Running Development Containers"
-  docker-compose down && \ 
-  docker-compose build --force-rm --compress && \ 
-  docker-compose up -d
+  docker compose down && \
+  docker compose build --force-rm --compress && \
+  docker compose up -d
 else
   echo "Provide a build environment(dev/prod)."
 fi

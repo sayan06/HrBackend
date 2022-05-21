@@ -7,7 +7,7 @@ networks:
 services:
   ### Apache ################################################
 
-  ims-webserver:
+  hr-webserver:
     build:
       context: ./bin/webserver
       args:
@@ -20,14 +20,14 @@ services:
         - PUID=${WORKSPACE_PUID}
         - PGID=${WORKSPACE_PGID}
         - NODE_VERSION=${WORKSPACE_NODE_VERSION}
-    container_name: "ims-webserver"
+    container_name: "hr-webserver"
     restart: "always"
     networks:
       - app-network
     ports:
       - "80:80"
     links:
-      - ims-mysql
+      - hr-mysql
     volumes:
       - ${DOCUMENT_ROOT-./www}:/var/www/html
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
@@ -37,9 +37,9 @@ services:
 
   ### MySQL ################################################
 
-  ims-mysql:
+  hr-mysql:
     image: mariadb
-    container_name: "ims-mysql"
+    container_name: "hr-mysql"
     command: mysqld --sql_mode=""
     restart: "always"
     networks:
@@ -56,11 +56,11 @@ services:
 
   ### phpMyAdmin ################################################
 
-  ims-phpmyadmin:
+  hr-phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: "ims-phpmyadmin"
+    container_name: "hr-phpmyadmin"
     environment:
-      PMA_HOST: ims-mysql
+      PMA_HOST: hr-mysql
       PMA_PORT: 3306
     networks:
       - app-network
