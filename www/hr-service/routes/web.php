@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
     // TODO: redirect to our `hr-admin URL`
-    return Redirect::away('http://google.com');
-});
+    // return Redirect::away('http://google.com');
+// });
