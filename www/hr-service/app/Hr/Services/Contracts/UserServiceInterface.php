@@ -14,4 +14,6 @@ interface UserServiceInterface
     public function createAuthToken(User $user): string;
 
     public function refreshAuthToken(User $user): string;
+
+    public function createUserDetails(User $user, array $attributes = []);
 }

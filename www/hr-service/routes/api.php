@@ -22,6 +22,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/users/verify-otp', [AuthController::class, 'verifyOtp']);
     Route::post('/forgot-password', [PasswordResetController::class, 'sendPasswordResetMail']);
     Route::post('/password-reset', [PasswordResetController::class, 'resetPasswordByToken']);
+    Route::post('/onboard-user', [UserInformationController::class, 'onboardUserDetails']);
+
 });
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {

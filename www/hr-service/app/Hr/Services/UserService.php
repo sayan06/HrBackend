@@ -60,4 +60,9 @@ final class UserService implements UserServiceInterface
 
         return $this->createAuthToken($user);
     }
+
+    public function createUserDetails(User $user, array $attributes = [])
+    {
+        dd($attributes);
+    }
 }
