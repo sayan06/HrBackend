@@ -74,4 +74,9 @@ class UserInformation extends BaseModel
     {
         return $this->hasOne(BodyStyle::class, 'body_style_id', 'id');
     }
+
+    public function alcoholConsumptionTypes(): HasOne
+    {
+        return $this->hasOne(ConsumptionType::class, 'consumption_type_id', 'id');
+    }
 }

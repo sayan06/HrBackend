@@ -4,9 +4,9 @@ namespace App\Hr\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Degree extends BaseModel
+class ConsumptionType extends BaseModel
 {
     use HasFactory;
 
-    protected $table = 'body_styles';
+    protected $table = 'alcohol_consumption_types';
 }

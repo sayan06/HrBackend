@@ -4,9 +4,9 @@ namespace App\Hr\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MartialStatus extends BaseModel
+class BodyStyle extends BaseModel
 {
     use HasFactory;
 
-    protected $table = 'statuses';
+    protected $table = 'body_styles';
 }
