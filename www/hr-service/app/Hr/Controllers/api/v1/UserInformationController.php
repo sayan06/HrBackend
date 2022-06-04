@@ -46,10 +46,10 @@ final class UserInformationController extends ApiController
             'astrological_sign' => 'required|int|min:1|max:9999999999|exists:astrological_signs, id',
             'body_style' => 'required|int|min:1|max:9999999999|exists:body_styles, id',
             'martial_status' => 'required|int|min:1|max:9999999999|exists:statuses, id',
+            'smoker' => 'required|boolean',
             'ideal_match' => 'array',
             'ideal_match.*.*' => 'int|min:1|max:9999999999|exists:ideal_matches, id',
             'interests' => 'array',
-            'smoker' => 'required|boolean',
             'interests.*.*' => 'int|min:1|max:9999999999|exists:interests, id',
             'gender' =>  [
                 'required',
@@ -61,9 +61,9 @@ final class UserInformationController extends ApiController
             'hair_colour' => 'int|min:1|max:9999999999|exists:hair_colours,id',
             'languages' => 'array',
             'languages.*.*' => 'int|min:1|max:9999999999|exists:languages,id',
-            'user_input_questions_answers' => 'array',
-            'user_input_questions_answers.*.question_id' => 'int|min:1|max:9999999999|exists:questions_answers, id',
-            'user_input_questions_answers.*.response' => 'string|max:255',
+            'questions_answers' => 'array',
+            'questions_answers.*.question_id' => 'int|min:1|max:9999999999|exists:questions_answers, id',
+            'questions_answers.*.response' => 'string|max:255',
 
         ]);
 
