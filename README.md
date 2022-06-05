@@ -1,24 +1,9 @@
 # Steps to setup hr-infra
 
-- Clone the inventory management repository from gitlab.
+- Clone the repository.
 - Run command `sh build.sh dev` in the console for dev deployment.
 - Run command `sh build.sh prod` in the console for production deployment.
-- The `www` folder should be created then clone `hr-client` and `hr-service` projects from their respective repositories inside it.
-
-### Steps to set up hr-client
-
-- Copy hr-client inside `www` folder.
-- Copy .env.example ito .env .
-- Run build script in `dev` mode.
-- Client will be running on http://localhost:4200
-
-### Steps to deploy hr-client in production server
-
-- Run build script in `dev` mode.
-- Open a new tab in the terminal and run command `docker exec -it hr-client /bin/bash` to enter the client container.
-- Run command `npm run build`.
-- Go to the url http://localhost where hr-client is running for production.
-- Run build script in `prod` mode.
+- The `www` folder should be created then clone `hr-service` projects from their respective repositories inside it.
 
 ### Steps to setup hr-service
 
