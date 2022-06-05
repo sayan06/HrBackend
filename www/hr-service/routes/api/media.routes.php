@@ -8,8 +8,8 @@ Route::prefix('media')->group(function () {
         ->middleware('permission:delete_media');
 
     Route::post('/upload', [MediaController::class, 'updateMediaItems'])
-        ->middleware('permission:upload_medias');
+        ->middleware('permission:upload_media');
 
     Route::post('/download', [MediaController::class, 'getMediaItems'])
-        ->middleware('permission:download_medias');
+        ->middleware('permission:download_media');
 });

@@ -4,9 +4,7 @@ namespace App\Hr\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Astrological extends BaseModel
+class AstrologicalSign extends BaseModel
 {
     use HasFactory;
-
-    protected $table = 'astrological_signs';
 }
