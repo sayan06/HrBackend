@@ -30,7 +30,6 @@ final class MediaController extends ApiController
             'entity_id' => 'required|int|min:1',
             'entity' => 'required|string',
             'media_type_id' => 'required|numeric|gte:1|exists:media_types,id',
-            'mediafile' => 'prohibited',
         ];
 
         $request->validate($rules);
