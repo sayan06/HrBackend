@@ -23,9 +23,10 @@ class DatabaseSeeder extends Seeder
             HairColorsSeeder::class,
             LanguagesSeeder::class,
             MaritalStatusesSeeder::class,
+            PersonalitiesSeeder::class,
             ReligionsSeeder::class,
             RolesAndPermissionsSeeder::class,
-            UserSeeder::class,
+            UsersSeeder::class,
         ]);
     }
 }
