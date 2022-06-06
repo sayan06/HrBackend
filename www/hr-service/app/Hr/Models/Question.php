@@ -2,6 +2,7 @@
 
 namespace App\Hr\Models;
 
-class Language extends BaseModel
+class Question extends BaseModel
 {
+
 }

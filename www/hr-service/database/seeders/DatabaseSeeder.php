@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             BodyStylesSeeder::class,
             DegreesSeeder::class,
             EthnicitiesSeeder::class,
+            KidsTypeRequirementsSeeder::class,
             EyeColorsSeeder::class,
             HairColorsSeeder::class,
             LanguagesSeeder::class,

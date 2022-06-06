@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Hr\Models\MartialStatus;
+use App\Hr\Models\MaritalStatus;
 use Illuminate\Database\Seeder;
 
 class MaritalStatusesSeeder extends Seeder
@@ -26,6 +26,6 @@ class MaritalStatusesSeeder extends Seeder
             $statusesArray[] = ['name' => $status];
         }
 
-        MartialStatus::insert($statusesArray);
+        MaritalStatus::insert($statusesArray);
     }
 }
