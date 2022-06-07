@@ -80,8 +80,8 @@ class User extends Authenticatable
         return $query->where('disabled_at', '!=', null);
     }
 
-    public function photos(): HasMany
+    public function media(): HasMany
     {
-        return $this->hasMany(UserPhoto::class, 'user_id', 'id');
+        return $this->hasMany(UserMedia::class, 'user_id', 'id');
     }
 }
