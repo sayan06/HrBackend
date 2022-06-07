@@ -2,6 +2,7 @@
 
 namespace App\Hr\Models;
 
-class IdealMatch extends BaseModel
+class Question extends BaseModel
 {
+
 }

@@ -3,6 +3,7 @@
 use App\Hr\Controllers\api\v1\AuthController;
 use App\Hr\Controllers\api\v1\OnboardingController;
 use App\Hr\Controllers\api\v1\PasswordResetController;
+use App\Hr\Controllers\api\v1\UserInformationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/users/verify-otp', [AuthController::class, 'verifyOtp']);
     Route::post('/forgot-password', [PasswordResetController::class, 'sendPasswordResetMail']);
     Route::post('/password-reset', [PasswordResetController::class, 'resetPasswordByToken']);
-    Route::post('/onboard-user', [UserInformationController::class, 'onboardUserDetails']);
+    Route::post('/users/on-board', [UserInformationController::class, 'onBoardUserDetails']);
     Route::get('/users/body-style', [OnboardingController::class, 'indexBodyStyle']);
     Route::post('/users/degree', [OnboardingController::class, 'indexDegree']);
     Route::post('/users/astrological-sign', [OnboardingController::class, 'indexAstrologicalSign']);
