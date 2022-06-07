@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('user_informations', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id');
             $table->integer('DOB');
-            $table->integer('height_feet');
-            $table->integer('height_inches');
+            $table->double('height_feet');
+            $table->double('height_inches');
             $table->integer('degree_id');
             $table->integer('ethnicity_id');
             $table->integer('eye_color_id');
@@ -40,6 +40,7 @@ return new class extends Migration
             $table->boolean('is_hidden');
             $table->boolean('smoker');
             $table->boolean('kids');
+            $table->integer('steps');
             $table->timestamps();
             $table->softDeletes();
         });

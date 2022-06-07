@@ -3,7 +3,7 @@
 namespace App\Hr\Controllers\api\v1;
 
 use App\Hr\Controllers\api\ApiController;
-use App\Hr\Models\Astrological;
+use App\Hr\Models\AstrologicalSign;
 use App\Hr\Models\BodyStyle;
 use App\Hr\Models\ConsumptionType;
 use App\Hr\Models\Degree;
@@ -27,7 +27,7 @@ final class OnboardingController extends ApiController
 
     public function indexAstrologicalSign()
     {
-        return $this->respond(Astrological::all());
+        return $this->respond(AstrologicalSign::all());
     }
 
     public function indexEyeColor()
