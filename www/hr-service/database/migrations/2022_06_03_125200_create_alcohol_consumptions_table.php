@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMediasTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateMediasTable extends Migration
      */
     public function up()
     {
-        Schema::create('media_items', function (Blueprint $table) {
+        Schema::create('alcohol_consumptions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('path')->unique();
-            $table->integer('media_type_id');
-            $table->integer('created_by');
-            $table->integer('created_at')->nullable();
-            $table->integer('updated_at')->nullable();
         });
     }
 
@@ -31,6 +26,6 @@ class CreateMediasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media_items');
+        Schema::dropIfExists('alcohol_consumptions');
     }
-}
+};
