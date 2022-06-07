@@ -2,7 +2,7 @@
 
 namespace App\Hr\Models;
 
-class Interest extends BaseModel
+class MaritalStatus extends BaseModel
 {
     public $timestamps = false;
 }

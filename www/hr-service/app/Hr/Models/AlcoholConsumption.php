@@ -4,7 +4,7 @@ namespace App\Hr\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MediaType extends BaseModel
+class AlcoholConsumption extends BaseModel
 {
     use HasFactory;
 

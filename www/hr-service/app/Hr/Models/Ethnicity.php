@@ -8,5 +8,7 @@ class Ethnicity extends BaseModel
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'ethnicities';
 }

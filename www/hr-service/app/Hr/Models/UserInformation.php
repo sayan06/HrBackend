@@ -56,7 +56,7 @@ class UserInformation extends BaseModel
 
     public function astrology(): HasOne
     {
-        return $this->hasOne(Astrological::class, 'astro_sign_id', 'id');
+        return $this->hasOne(AstrologicalSign::class, 'astro_sign_id', 'id');
     }
 
     public function martialStatus(): HasOne
