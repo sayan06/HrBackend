@@ -4,6 +4,7 @@ namespace App\Hr\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as IlluminateResponse;
 
 abstract class ApiController extends Controller
@@ -22,32 +23,32 @@ abstract class ApiController extends Controller
         return $this;
     }
 
-    protected function respondNotFound(string $message = 'Not Found!')
+    protected function respondNotFound(string $message = 'Not Found!'): JsonResponse
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_NOT_FOUND)->respondWithError($message);
     }
 
-    protected function respondBadRequest(string $message = 'Bad Request!')
+    protected function respondBadRequest(string $message = 'Bad Request!'): JsonResponse
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_BAD_REQUEST)->respondWithError($message);
     }
 
-    protected function respondInternalError(string $message = 'Internal Error!')
+    protected function respondInternalError(string $message = 'Internal Error!'): JsonResponse
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_INTERNAL_SERVER_ERROR)->respondWithError($message);
     }
 
-    protected function respondValidationError(string $message = 'Validation Error!')
+    protected function respondValidationError(string $message = 'Validation Error!'): JsonResponse
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_UNPROCESSABLE_ENTITY)->respondWithError($message);
     }
 
-    protected function respondForbidden(string $message = 'Forbidden!')
+    protected function respondForbidden(string $message = 'Forbidden!'): JsonResponse
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_FORBIDDEN)->respondWithError($message);
     }
 
-    protected function respondUnavailabilityError(string $message = 'Resource Exists No More!')
+    protected function respondUnavailabilityError(string $message = 'Resource Exists No More!'): JsonResponse
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_GONE)->respondWithError($message);
     }
@@ -57,9 +58,9 @@ abstract class ApiController extends Controller
      *
      * @param  array or object $data
      * @param  array  $headers
-     * @return json
+     * @return JsonResponse
      */
-    protected function respond($data, array $headers = [])
+    protected function respond($data, array $headers = []): JsonResponse
     {
         return response()->json(
             [
@@ -75,9 +76,9 @@ abstract class ApiController extends Controller
      *
      * @param  mixed collection
      * @param  array  $headers
-     * @return json
+     * @return JsonResponse
      */
-    protected function respondPaginated($paginatedCollection, array $headers = [])
+    protected function respondPaginated($paginatedCollection, array $headers = []): JsonResponse
     {
         if (!is_object($paginatedCollection)) {
             return $this->respond($paginatedCollection);
@@ -106,7 +107,7 @@ abstract class ApiController extends Controller
         );
     }
 
-    protected function respondSuccess($message, $data, $headers = [])
+    protected function respondSuccess($message, $data, $headers = []): JsonResponse
     {
         return response()->json(
             [
@@ -118,7 +119,7 @@ abstract class ApiController extends Controller
         );
     }
 
-    protected function respondWithError($message)
+    protected function respondWithError($message): JsonResponse
     {
         return response()->json(
             [
@@ -131,7 +132,7 @@ abstract class ApiController extends Controller
         );
     }
 
-    protected function respondCreated(string $message, $data = null, $headers = [])
+    protected function respondCreated(string $message, $data = null, $headers = []): JsonResponse
     {
         return response()->json(
             [

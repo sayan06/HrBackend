@@ -41,7 +41,7 @@ final class UserInformationController extends ApiController
             'eye_color'  => 'required|int|min:1|max:9999999999|exists:eye_colors, id',
             'personality_type' => 'array',
             'personality_type.*.*' => 'int|min:1|max:9999999999|exists:personality_types, id',
-            'alcohol_consumption_type' => 'required|int|min:1|max:9999999999|exists:alcohol_consumption_types, id',
+            'alcohol_consumption_type' => 'required|int|min:1|max:9999999999|exists:alcohol_consumption, id',
             'religion' => 'required|int|min:1|max:9999999999|exists:religions, id',
             'astrological_sign' => 'required|int|min:1|max:9999999999|exists:astrological_signs, id',
             'body_style' => 'required|int|min:1|max:9999999999|exists:body_styles, id',
