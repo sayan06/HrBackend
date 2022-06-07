@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateUserPhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('alcohol_consumption_types', function (Blueprint $table) {
+        Schema::create('user_photos', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('type');
+            $table->string('path');
             $table->string('name');
+            $table->boolean('is_enabled');
+            $table->boolean('is_default');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alcohol_consumption_types');
+        Schema::dropIfExists('user_photos');
     }
-};
+}

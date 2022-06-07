@@ -38,8 +38,8 @@ Route::prefix('v1')->group(function () {
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::group([], __DIR__ . '/api/auth.routes.php');
-    Route::group([], __DIR__ . '/api/media.routes.php');
     Route::group([], __DIR__ . '/api/permission.routes.php');
     Route::group([], __DIR__ . '/api/role.routes.php');
+    Route::group([], __DIR__ . '/api/user-photo.routes.php');
     Route::group([], __DIR__ . '/api/user.routes.php');
 });

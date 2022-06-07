@@ -5,7 +5,6 @@ namespace App\Hr\Controllers\api\v1;
 use App\Hr\Controllers\api\ApiController;
 use App\Hr\Models\User;
 use App\Hr\Models\UserInformation;
-use App\Hr\Repositories\Contracts\UserRepositoryInterface;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -13,13 +12,9 @@ use Illuminate\Http\Request;
 final class UserInformationController extends ApiController
 {
     private $userService;
-    private $userRepository;
 
-    public function __construct(
-        UserRepositoryInterface $userRepository,
-        UserServiceInterface $userService,
-    ) {
-        $this->userRepository = $userRepository;
+    public function __construct(UserServiceInterface $userService)
+    {
         $this->userService = $userService;
     }
 
@@ -60,7 +55,7 @@ final class UserInformationController extends ApiController
                     UserInformation::GENDER_MALE,
                 ]),
             ],
-            'hair_colour' => 'int|min:1|max:9999999999|exists:hair_colours,id',
+            'hair_color' => 'int|min:1|max:9999999999|exists:hair_colors,id',
             'languages' => 'array',
             'languages.*.*' => 'int|min:1|max:9999999999|exists:languages,id',
             'questions_answers' => 'array',

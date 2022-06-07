@@ -4,6 +4,7 @@ namespace App\Hr\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,6 +49,8 @@ class User extends Authenticatable
         'two_factor_secret',
         'email_verified_at',
         'current_team_id',
+        'otp',
+        'profile_photo_path',
     ];
 
     /**
@@ -75,5 +78,10 @@ class User extends Authenticatable
     public function scopeActive($query): Builder
     {
         return $query->where('disabled_at', '!=', null);
+    }
+
+    public function photos(): HasMany
+    {
+        return $this->hasMany(UserPhoto::class, 'user_id', 'id');
     }
 }
