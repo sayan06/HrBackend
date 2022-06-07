@@ -60,9 +60,6 @@ final class RolesAndPermissionsSeeder extends Seeder
 
         $this->createRole('guest')->givePermissionTo(
             'change_user_password',
-            'list_items',
-            'list_purchase_orders',
-            'list_variants',
             'update_user',
         );
 
