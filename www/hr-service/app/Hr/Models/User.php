@@ -51,6 +51,8 @@ class User extends Authenticatable
         'current_team_id',
         'otp',
         'profile_photo_path',
+        'created_at',
+        'updated_at',
     ];
 
     /**

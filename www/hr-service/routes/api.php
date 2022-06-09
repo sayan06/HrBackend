@@ -41,5 +41,6 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::group([], __DIR__ . '/api/permission.routes.php');
     Route::group([], __DIR__ . '/api/role.routes.php');
     Route::group([], __DIR__ . '/api/user-media.routes.php');
+    Route::group([], __DIR__ . '/api/user-post.routes.php');
     Route::group([], __DIR__ . '/api/user.routes.php');
 });

@@ -12,9 +12,14 @@ final class UserMediaRepository extends BaseRepository implements UserMediaRepos
         $this->model = UserMedia::class;
     }
 
-    public function createMedia(array $userMediaDetails): bool
+    public function createMany(array $userMediaDetails): bool
     {
         return UserMedia::insert($userMediaDetails);
+    }
+
+    public function create(array $userMediaDetails): UserMedia
+    {
+        return UserMedia::create($userMediaDetails);
     }
 
     public function update(UserMedia $userMedia, array $userMediaDetails): UserMedia

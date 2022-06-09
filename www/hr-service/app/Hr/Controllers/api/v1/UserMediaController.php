@@ -7,6 +7,7 @@ use App\Hr\Models\UserMedia;
 use App\Hr\Services\Contracts\UserMediaServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 final class UserMediaController extends ApiController
 {
@@ -36,24 +37,27 @@ final class UserMediaController extends ApiController
         $request->validate([
             'is_default' => 'boolean',
             'is_enabled' => 'boolean',
-            'photos.*' => 'file|mimes:jpg,jpeg,png,mp4',
+            'media.*' => 'file|mimes:jpg,jpeg,png,mp4',
             'type' => 'string',
             'user_id' => 'prohibited',
         ]);
 
-        if (!$request->hasAny(['is_default', 'is_enabled', 'type']) && !$request->hasFile('photos')) {
+        if (!$request->hasAny(['is_default', 'is_enabled', 'type']) && !$request->hasFile('media')) {
             return $this->respondBadRequest('Nothing To Update');
         }
 
         return $this->respondSuccess(
             'File Updated Successfully',
-            $this->userMediaService->update($userMedia, $request->all(), $request->file('photos'))
+            $this->userMediaService->update($userMedia, $request->all(), $request->file('media'))
         );
     }
 
     public function get(UserMedia $userMedia): JsonResponse
     {
-        return $this->respond($userMedia->load('user'));
+        return $this->respond([
+            'media_data' => $userMedia->load('user'),
+            'media' => Storage::get($userMedia->path),
+        ]);
     }
 
     public function delete(UserMedia $userMedia): JsonResponse

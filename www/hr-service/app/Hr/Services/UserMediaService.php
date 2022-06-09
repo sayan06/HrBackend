@@ -44,7 +44,7 @@ final class UserMediaService implements UserMediaServiceInterface
                 ];
             }
 
-            $this->userMediaRepo->createMedia($userMediaDetails);
+            $this->userMediaRepo->createMany($userMediaDetails);
 
             DB::commit();
         } catch (Exception $ex) {

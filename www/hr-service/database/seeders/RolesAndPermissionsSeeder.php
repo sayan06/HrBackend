@@ -26,9 +26,17 @@ final class RolesAndPermissionsSeeder extends Seeder
     ];
 
     private $mediaPermissions = [
+        'create_media',
         'delete_media',
-        'download_media',
-        'upload_media',
+        'list_media',
+        'update_media',
+    ];
+
+    private $postPermissions = [
+        'create_post',
+        'delete_post',
+        'list_post',
+        'update_post',
     ];
 
     private $rolePermissions = [
@@ -72,6 +80,7 @@ final class RolesAndPermissionsSeeder extends Seeder
             $this->addressPermissions,
             $this->authPermissions,
             $this->mediaPermissions,
+            $this->postPermissions,
             $this->rolePermissions,
         );
     }
