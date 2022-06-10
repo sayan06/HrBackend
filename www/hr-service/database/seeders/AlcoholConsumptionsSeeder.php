@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Hr\Models\ConsumptionType;
+use App\Hr\Models\AlcoholConsumption;
 use Illuminate\Database\Seeder;
 
 class AlcoholConsumptionsSeeder extends Seeder
@@ -25,6 +25,6 @@ class AlcoholConsumptionsSeeder extends Seeder
             $statusesArray[] = ['name' => $status];
         }
 
-        ConsumptionType::insert($statusesArray);
+        AlcoholConsumption::insert($statusesArray);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Hr\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserPhoto extends BaseModel
+class UserMedia extends BaseModel
 {
     use HasFactory;
 

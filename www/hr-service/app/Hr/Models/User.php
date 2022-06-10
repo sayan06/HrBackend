@@ -51,6 +51,8 @@ class User extends Authenticatable
         'current_team_id',
         'otp',
         'profile_photo_path',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -80,8 +82,8 @@ class User extends Authenticatable
         return $query->where('disabled_at', '!=', null);
     }
 
-    public function photos(): HasMany
+    public function media(): HasMany
     {
-        return $this->hasMany(UserPhoto::class, 'user_id', 'id');
+        return $this->hasMany(UserMedia::class, 'user_id', 'id');
     }
 }

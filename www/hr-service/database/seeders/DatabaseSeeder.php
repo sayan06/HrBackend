@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             PersonalitiesSeeder::class,
             ReligionsSeeder::class,
             RolesAndPermissionsSeeder::class,
+            UserPostVisibilitiesSeeder::class,
             UsersSeeder::class,
         ]);
     }
