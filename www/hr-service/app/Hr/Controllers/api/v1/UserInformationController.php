@@ -64,7 +64,7 @@ final class UserInformationController extends ApiController
             'is_hidden' => 'bool',
             'steps' => 'int',
         ]);
-        dd($request);
+
         return $this->respondCreated(
             'User information saved successfully!',
             ($this->userService->createUserDetails($user, $request->all()))
