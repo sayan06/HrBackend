@@ -54,10 +54,7 @@ final class UserMediaController extends ApiController
 
     public function get(UserMedia $userMedia): JsonResponse
     {
-        return $this->respond([
-            'media_data' => $userMedia->load('user'),
-            'media' => Storage::get($userMedia->path),
-        ]);
+        return $this->respond($userMedia->load('user'));
     }
 
     public function delete(UserMedia $userMedia): JsonResponse
