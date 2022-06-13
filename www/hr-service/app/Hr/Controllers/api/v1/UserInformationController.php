@@ -61,6 +61,8 @@ final class UserInformationController extends ApiController
             'questions_answers' => 'array',
             'questions_answers.*.question_id' => 'int|min:1|max:9999999999|exists:questions_answers,id',
             'questions_answers.*.response' => 'string|max:255',
+            'flavours' => 'array',
+            'flavours.*.*' => 'string|max:255',
             'is_hidden' => 'bool',
             'steps' => 'int',
         ]);
@@ -69,5 +71,37 @@ final class UserInformationController extends ApiController
             'User information saved successfully!',
             ($this->userService->createUserDetails($user, $request->all()))
         );
+    }
+
+    public function update(User $user, Request $request)
+    {
+
+    }
+
+    public function get(User $user)
+    {
+        return $this->respond($this->userService->getUserInformation($user));
+    }
+
+    public function likeOrDisLikeUser(Request $request)
+    {
+        $request->validate([
+            'likability' => 'required|bool',
+            'user_id' => 'required|int|min:1|max:9999999999|exists:users,id'
+        ]);
+
+        return $this->respondSuccess(
+            'Likability updated successfully',
+            $this->userService->getLikability($request->user(), $request->all()));
+    }
+
+    public function getLikedUsers(User $user)
+    {
+
+    }
+
+    public function getDisLiskedUser(User $user)
+    {
+
     }
 }

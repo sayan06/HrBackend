@@ -34,6 +34,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/users/consumption-type', [OnboardingController::class, 'indexConsumptionType']);
     Route::post('/users/eye-color', [OnboardingController::class, 'indexEyeColor']);
     Route::post('/users/hair-color', [OnboardingController::class, 'indexHairColor']);
+    Route::post('/users/likability', [UserInformationController::class, 'likeOrDisLikeUser']);
 });
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {

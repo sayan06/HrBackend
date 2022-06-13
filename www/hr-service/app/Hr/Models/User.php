@@ -86,4 +86,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserMedia::class, 'user_id', 'id');
     }
+
+    public function likability(): HasMany
+    {
+        return $this->hasMany(Likability::class, 'user_id', 'id');
+    }
 }

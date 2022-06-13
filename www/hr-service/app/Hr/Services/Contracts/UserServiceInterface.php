@@ -16,4 +16,6 @@ interface UserServiceInterface
     public function refreshAuthToken(User $user): string;
 
     public function createUserDetails(User $user, array $attributes = []);
+
+    public function getLikability(User $user, array $attributes = []);
 }

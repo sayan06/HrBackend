@@ -2,11 +2,13 @@
 
 namespace App\Hr\Services;
 
+use App\Hr\Models\Likability;
 use App\Hr\Models\Role;
 use App\Hr\Models\User;
 use App\Hr\Repositories\Contracts\UserRepositoryInterface;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Throwable;
 
 final class UserService implements UserServiceInterface
@@ -65,4 +67,38 @@ final class UserService implements UserServiceInterface
     {
         dd($attributes);
     }
+
+    public function getLikability(User $user, array $attributes = [])
+    {
+        $likabilityData = [
+            'user_id' => data_get($attributes, 'user_id'),
+            'likability' => data_get($attributes, 'likability'),
+            'liked_by_id' => $user->id,
+        ];
+
+        if ($likabilityData['user_id'] === $likabilityData['liked_by_id']) {
+            throw new BadRequestException('User can only like or dislike other active users');
+        }
+
+        $alreadyLiked = Likability::where('user_id', $likabilityData['user_id'])->where('liked_by_id', $likabilityData['liked_by_id'])->count();
+
+        if ($alreadyLiked >= 1) {
+            Likability::where('user_id', $likabilityData['user_id'])->where('liked_by_id', $likabilityData['liked_by_id'])->delete();
+        }
+
+        try {
+            DB::beginTransaction();
+
+            Likability::create($likabilityData);
+
+            DB::commit();
+
+            return $user->load('likability');
+        } catch (Throwable $th) {
+            DB::rollBack();
+
+            throw $th;
+        }
+    }
+
 }

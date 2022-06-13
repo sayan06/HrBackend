@@ -1,6 +1,7 @@
 <?php
 
 use App\Hr\Controllers\api\v1\UserController;
+use App\Hr\Controllers\api\v1\UserInformationController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('users')->group(function () {
@@ -15,4 +16,6 @@ Route::prefix('users')->group(function () {
 
     Route::put('/{user}', [UserController::class, 'updateUser'])
         ->middleware('permission:update_user');
+
+    Route::post('/likability', [UserInformationController::class, 'likeOrDisLikeUser']);
 });
