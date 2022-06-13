@@ -5,6 +5,7 @@ namespace App\Hr\Services;
 use App\Hr\Models\Likability;
 use App\Hr\Models\Role;
 use App\Hr\Models\User;
+use App\Hr\Models\UserInformation;
 use App\Hr\Repositories\Contracts\UserRepositoryInterface;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Support\Facades\DB;
@@ -65,7 +66,55 @@ final class UserService implements UserServiceInterface
 
     public function createUserDetails(User $user, array $attributes = [])
     {
-        dd($attributes);
+        $personalityTypes = data_get($attributes, 'personality_types');
+        $ideal_matches = data_get($attributes, 'ideal_matches');
+        $interests = data_get($attributes, 'interests');
+        $languages = data_get($attributes, 'languages');
+        $questions = data_get($attributes, 'questions_answers');
+        $flavours = data_get($attributes, 'flavours');
+
+        $userInformation = [
+            'country' => data_get($attributes, 'country'),
+            'city' => data_get($attributes, 'city'),
+            'dob' => data_get($attributes, 'dob'),
+            'height_feet' => data_get($attributes, 'height_feet'),
+            'height_inch' => data_get($attributes, 'height_inch'),
+            'about' => data_get($attributes, 'about'),
+            'job_title' => data_get($attributes, 'job_title'),
+            'company_name' => data_get($attributes, 'company_name'),
+            'college_name' => data_get($attributes, 'college_name'),
+            'high_school_name' => data_get($attributes, 'high_school_name'),
+            'degree_id' => data_get($attributes, 'degree_id'),
+            'ethnicity_id' => data_get($attributes, 'ethnicity_id'),
+            'eye_color_id'  => data_get($attributes, 'eye_color_id'),
+            'alcohol_consumption_type_id' => data_get($attributes, 'alcohol_consumption_type_id'),
+            'religion_id' => data_get($attributes, 'religion_id'),
+            'astrological_sign_id' => data_get($attributes, 'astrological_sign_id'),
+            'body_style_id' => data_get($attributes, 'body_style_id'),
+            'marital_status_id' => data_get($attributes, 'marital_status_id'),
+            'smoker' => data_get($attributes, 'smoker'),
+            'kids' =>data_get($attributes, 'kids'),
+            'kids_requirement_type_id' => data_get($attributes, 'kids_requirement_type_id'),
+            'gender' => data_get($attributes, 'gender'),
+            'hair_color' => data_get($attributes, 'hair_color'),
+            'is_hidden' => data_get($attributes, 'is_hidden'),
+            'steps' => data_get($attributes, 'steps'),
+            'user_id' => $user->id,
+        ];
+
+        try {
+            DB::beginTransaction();
+
+            UserInformation::create($userInformation);
+
+            DB::commit();
+
+            return $user->load('userInfo');
+        } catch (Throwable $th) {
+            DB::rollBack();
+
+            throw $th;
+        }
     }
 
     public function getLikability(User $user, array $attributes = [])
@@ -100,5 +149,4 @@ final class UserService implements UserServiceInterface
             throw $th;
         }
     }
-
 }

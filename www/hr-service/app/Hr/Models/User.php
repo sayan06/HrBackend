@@ -5,6 +5,7 @@ namespace App\Hr\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -90,5 +91,10 @@ class User extends Authenticatable
     public function likability(): HasMany
     {
         return $this->hasMany(Likability::class, 'user_id', 'id');
+    }
+
+    public function userInfo(): HasOne
+    {
+        return $this->hasOne(UserInformation::class, 'id', 'user_id');
     }
 }
