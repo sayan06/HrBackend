@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_responses', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_info_id')->constrained('user_informations');
-            $table->foreignId('question_id')->constrained('questions');
-            $table->string('response');
+        Schema::create('user_ideal_matches', function (Blueprint $table) {
+            $table->integer('ideal_match_id');
+            $table->integer('user_id');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_responses');
+        Schema::dropIfExists('user_ideal_matches');
     }
 };

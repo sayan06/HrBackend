@@ -5,7 +5,13 @@ namespace App\Hr\Services;
 use App\Hr\Models\Likability;
 use App\Hr\Models\Role;
 use App\Hr\Models\User;
+use App\Hr\Models\UserFlavour;
+use App\Hr\Models\UserIdealMatch;
 use App\Hr\Models\UserInformation;
+use App\Hr\Models\UserInterest;
+use App\Hr\Models\UserLanguage;
+use App\Hr\Models\UserPersonality;
+use App\Hr\Models\UserQuestionAnswer;
 use App\Hr\Repositories\Contracts\UserRepositoryInterface;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +73,7 @@ final class UserService implements UserServiceInterface
     public function createUserDetails(User $user, array $attributes = [])
     {
         $personalityTypes = data_get($attributes, 'personality_types');
-        $ideal_matches = data_get($attributes, 'ideal_matches');
+        $idealMatches = data_get($attributes, 'ideal_matches');
         $interests = data_get($attributes, 'interests');
         $languages = data_get($attributes, 'languages');
         $questions = data_get($attributes, 'questions_answers');
@@ -102,10 +108,103 @@ final class UserService implements UserServiceInterface
             'user_id' => $user->id,
         ];
 
+        if (!empty($idealMatches)) {
+            $idealMatchData = [];
+            foreach ($idealMatches as $idealMatch) {
+                $idealMatchData [] = [
+                    'ideal_match_id' => $idealMatch,
+                    'user_id' => $user->id,
+                ];
+            }
+        }
+
+        if (!empty($personalityTypes)) {
+            $personalityTypeData = [];
+            foreach ($personalityTypes as $personalityType) {
+                $personalityTypeData [] = [
+                    'personality_type_id' => $personalityType,
+                    'user_id' => $user->id,
+                ];
+            }
+        }
+
+        if (!empty($interests)) {
+            $interestData = [];
+            foreach ($interests as $interest) {
+                $interestData [] = [
+                    'interest_id' => $interest,
+                    'user_id' => $user->id,
+                ];
+            }
+        }
+
+        if (!empty($languages)) {
+            $languageData = [];
+            foreach ($languages as $language) {
+                $languageData [] = [
+                    'language_id' => $language,
+                    'user_id' => $user->id,
+                ];
+            }
+        }
+
+        if (!empty($questions)) {
+            $questionsData = [];
+            foreach ($questions as $question) {
+                $questionsData [] = [
+                    'question_id' => $question->id,
+                    'response' => $question->response,
+                    'user_id' => $user->id,
+                ];
+            }
+        }
+
+        if (!empty($flavours)) {
+            $flavourData = [];
+            foreach ($flavours as $flavour) {
+                $flavourData [] = [
+                    'flavour_id' => $flavour,
+                    'user_id' => $user->id,
+                ];
+            }
+        }
+
         try {
             DB::beginTransaction();
 
             UserInformation::create($userInformation);
+
+            if(!empty($flavourData)) {
+                UserFlavour::where('user_id', $user->id)->delete();
+                UserFlavour::insert($flavourData);
+            }
+
+
+            if(!empty($questionsData)) {
+                UserQuestionAnswer::where('user_id', $user->id)->delete();
+                UserQuestionAnswer::insert($questionsData);
+            }
+
+            if(!empty($languageData)) {
+                UserLanguage::where('user_id', $user->id)->delete();
+                UserLanguage::insert($languageData);
+            }
+
+            if(!empty($interestData)) {
+                UserInterest::where('user_id', $user->id)->delete();
+                UserInterest::insert($interestData);
+            }
+
+
+            if(!empty($personalityTypeData)) {
+                UserPersonality::where('user_id', $user->id)->delete();
+                UserPersonality::insert($personalityTypeData);
+            }
+
+            if(!empty($idealMatchData)) {
+                UserIdealMatch::where('user_id', $user->id)->delete();
+                UserIdealMatch::insert($idealMatchData);
+            }
 
             DB::commit();
 
