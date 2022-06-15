@@ -84,7 +84,7 @@ final class UserService implements UserServiceInterface
             'city' => data_get($attributes, 'city'),
             'dob' => data_get($attributes, 'dob'),
             'height_feet' => data_get($attributes, 'height_feet'),
-            'height_inch' => data_get($attributes, 'height_inch'),
+            'height_inches' => data_get($attributes, 'height_inch'),
             'about' => data_get($attributes, 'about'),
             'job_title' => data_get($attributes, 'job_title'),
             'company_name' => data_get($attributes, 'company_name'),
@@ -102,7 +102,7 @@ final class UserService implements UserServiceInterface
             'kids' =>data_get($attributes, 'kids'),
             'kids_requirement_type_id' => data_get($attributes, 'kids_requirement_type_id'),
             'gender' => data_get($attributes, 'gender'),
-            'hair_color' => data_get($attributes, 'hair_color'),
+            'hair_color_id' => data_get($attributes, 'hair_color_id'),
             'is_hidden' => data_get($attributes, 'is_hidden'),
             'steps' => data_get($attributes, 'steps'),
             'user_id' => $user->id,
@@ -172,6 +172,7 @@ final class UserService implements UserServiceInterface
         try {
             DB::beginTransaction();
 
+            UserInformation::where('user_id', $user->id)->delete();
             UserInformation::create($userInformation);
 
             if(!empty($flavourData)) {

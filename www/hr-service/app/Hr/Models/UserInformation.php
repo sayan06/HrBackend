@@ -14,6 +14,9 @@ class UserInformation extends BaseModel
     public const GENDER_MALE = 'male';
     public const GENDER_FEMALE = 'female';
 
+    protected $table = 'user_informations';
+
+
     public const SORTABLE = [];
 
     public const FILTERABLES = [];
@@ -22,7 +25,34 @@ class UserInformation extends BaseModel
 
     protected $casts = [];
 
-    protected $fillable = [];
+    protected $fillable = [
+        'country',
+        'height_feet',
+        'dob',
+        'height_inches',
+        'job_title',
+        'company_name',
+        'high_school_name',
+        'degree_id',
+        'ethnicity_id',
+        'eye_color_id',
+        'alcohol_consumption_type_id',
+        'religion_id',
+        'astrological_sign_id',
+        'body_style_id',
+        'marital_status_id',
+        'smoker',
+        'kids',
+        'gender',
+        'city',
+        'is_hidden',
+        'steps',
+        'hair_color_id',
+        'user_id',
+        'kids_requirement_type_id',
+        'about',
+        'college_name',
+    ];
 
     public function user(): BelongsTo
     {

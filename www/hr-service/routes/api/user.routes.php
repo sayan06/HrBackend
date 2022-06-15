@@ -11,15 +11,19 @@ Route::prefix('users')->group(function () {
     Route::get('/{user}', [UserController::class, 'getUser'])
         ->middleware('permission:list_users');
 
+    Route::get('/user-info/{user}', [UserInformationController::class, 'getUserInfo']);
+
+    Route::get('/user-likability/{user}', [UserInformationController::class, 'getLikedDislikedUsers']);
+
     Route::put('/{user}/change-password', [UserController::class, 'changePassword'])
         ->middleware('permission:change_user_password');
 
     Route::put('/{user}', [UserController::class, 'updateUser'])
         ->middleware('permission:update_user');
 
-    Route::post('/likability', [UserInformationController::class, 'likeOrDisLikeUser']);
-
     Route::post('/on-board', [UserInformationController::class, 'onBoardUserDetails']);
 
-    Route::put('/on-board', [UserInformationController::class, 'update']);
+    Route::put('/on-board/{userInfo}', [UserInformationController::class, 'update']);
+
+    Route::post('/likability', [UserInformationController::class, 'likeOrDisLikeUser']);
 });

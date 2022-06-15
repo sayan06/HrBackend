@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             LanguagesSeeder::class,
             MaritalStatusesSeeder::class,
             PersonalitiesSeeder::class,
+            FlavoursSeeder::class,
             ReligionsSeeder::class,
             RolesAndPermissionsSeeder::class,
             UserPostVisibilitiesSeeder::class,

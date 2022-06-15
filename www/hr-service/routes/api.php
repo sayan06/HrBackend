@@ -24,16 +24,17 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/users/verify-otp', [AuthController::class, 'verifyOtp']);
     Route::post('/forgot-password', [PasswordResetController::class, 'sendPasswordResetMail']);
     Route::post('/password-reset', [PasswordResetController::class, 'resetPasswordByToken']);
-    Route::get('/users/body-style', [OnboardingController::class, 'indexBodyStyle']);
-    Route::post('/users/degree', [OnboardingController::class, 'indexDegree']);
-    Route::post('/users/astrological-sign', [OnboardingController::class, 'indexAstrologicalSign']);
-    Route::post('/users/religion', [OnboardingController::class, 'indexReligion']);
-    Route::post('/users/ethnicity', [OnboardingController::class, 'indexEthnicity']);
-    Route::post('/users/marital-status', [OnboardingController::class, 'indexMaritalStatus']);
-    Route::post('/users/consumption-type', [OnboardingController::class, 'indexConsumptionType']);
-    Route::post('/users/eye-color', [OnboardingController::class, 'indexEyeColor']);
-    Route::post('/users/hair-color', [OnboardingController::class, 'indexHairColor']);
-    Route::post('/users/likability', [UserInformationController::class, 'likeOrDisLikeUser']);
+    Route::get('/users/body-styles', [OnboardingController::class, 'indexBodyStyle']);
+    Route::get('/users/degrees', [OnboardingController::class, 'indexDegree']);
+    Route::get('/users/astrological-signs', [OnboardingController::class, 'indexAstrologicalSign']);
+    Route::get('/users/religions', [OnboardingController::class, 'indexReligion']);
+    Route::get('/users/ethnicities', [OnboardingController::class, 'indexEthnicity']);
+    Route::get('/users/marital-statuses', [OnboardingController::class, 'indexMaritalStatus']);
+    Route::get('/users/consumption-types', [OnboardingController::class, 'indexConsumptionType']);
+    Route::get('/users/eye-colors', [OnboardingController::class, 'indexEyeColor']);
+    Route::get('/users/hair-colors', [OnboardingController::class, 'indexHairColor']);
+    Route::get('/users/questions', [OnboardingController::class, 'indexQuestions']);
+    Route::get('/users/flavours', [OnboardingController::class, 'indexFlavours']);
 });
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {

@@ -3,6 +3,7 @@
 namespace App\Hr\Controllers\api\v1;
 
 use App\Hr\Controllers\api\ApiController;
+use App\Hr\Models\Likability;
 use App\Hr\Models\User;
 use App\Hr\Models\UserInformation;
 use App\Hr\Models\UserInterest;
@@ -19,7 +20,7 @@ final class UserInformationController extends ApiController
         $this->userService = $userService;
     }
 
-    public function onBoardUserDetails(User $user, Request $request)
+    public function onBoardUserDetails(Request $request)
     {
         $request->validate([
             'country' => 'string|max:255',
@@ -56,7 +57,7 @@ final class UserInformationController extends ApiController
                     UserInformation::GENDER_MALE,
                 ]),
             ],
-            'hair_color' => 'int|min:1|max:9999999999|exists:hair_colors,id',
+            'hair_color_id' => 'int|min:1|max:9999999999|exists:hair_colors,id',
             'languages' => 'array',
             'languages.*.*' => 'int|min:1|max:9999999999|exists:languages,id',
             'questions_answers' => 'array',
@@ -67,6 +68,8 @@ final class UserInformationController extends ApiController
             'is_hidden' => 'bool',
             'steps' => 'int',
         ]);
+
+        $user = $request->user();
 
         return $this->respondCreated(
             'User information saved successfully!',
@@ -81,7 +84,7 @@ final class UserInformationController extends ApiController
             'city' => 'string|max:255',
             'dob' => 'int|min:1|max:9999999999',
             'height_feet' => 'numeric',
-            'height_inch' => 'numeric',
+            'height_inches' => 'numeric',
             'about' => 'string|max:255',
             'job_title' => 'string|max:255',
             'company_name' => 'string|max:255|required_with:job_title',
@@ -105,7 +108,7 @@ final class UserInformationController extends ApiController
                     UserInformation::GENDER_MALE,
                 ]),
             ],
-            'hair_color' => 'int|min:1|max:9999999999|exists:hair_colors,id',
+            'hair_color_id' => 'int|min:1|max:9999999999|exists:hair_colors,id',
             'is_hidden' => 'bool',
             'steps' => 'int',
         ]);
@@ -119,9 +122,11 @@ final class UserInformationController extends ApiController
         );
     }
 
-    public function get(User $user)
+    public function getUserInfo(User $user)
     {
-        return $this->respond($this->userService->getUserInformation($user));
+        $user->load('userInfo');
+
+        return $this->respond($user);
     }
 
     public function likeOrDisLikeUser(Request $request)
@@ -133,16 +138,19 @@ final class UserInformationController extends ApiController
 
         return $this->respondSuccess(
             'Likability updated successfully',
-            $this->userService->getLikability($request->user(), $request->all()));
+            $this->userService->getLikability($request->user(), $request->all())
+        );
     }
 
-    public function getLikedUsers(User $user)
+    public function getLikedDislikedUsers(User $user)
     {
+        $likeCount = Likability::where('user_id', $user->id)->where('likability', 1)->count();
+        $disLikeCount = Likability::where('user_id', $user->id)->where('likability', 0)->count();
 
-    }
-
-    public function getDisLiskedUser(User $user)
-    {
-
+        return $this->respond([
+            'user_id' => $user->id,
+            'likes' => $likeCount,
+            'dislikes' => $disLikeCount,
+        ]);
     }
 }

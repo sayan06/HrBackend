@@ -3,14 +3,16 @@
 namespace App\Hr\Controllers\api\v1;
 
 use App\Hr\Controllers\api\ApiController;
+use App\Hr\Models\AlcoholConsumption;
 use App\Hr\Models\AstrologicalSign;
 use App\Hr\Models\BodyStyle;
-use App\Hr\Models\ConsumptionType;
 use App\Hr\Models\Degree;
 use App\Hr\Models\Ethnicity;
 use App\Hr\Models\EyeColor;
+use App\Hr\Models\Flavour;
 use App\Hr\Models\HairColor;
 use App\Hr\Models\MaritalStatus;
+use App\Hr\Models\Question;
 use App\Hr\Models\Religion;
 
 final class OnboardingController extends ApiController
@@ -57,6 +59,16 @@ final class OnboardingController extends ApiController
 
     public function indexConsumptionType()
     {
-        return $this->respond(ConsumptionType::all());
+        return $this->respond(AlcoholConsumption::all());
+    }
+
+    public function indexQuestions()
+    {
+        return $this->respond(Question::all());
+    }
+
+    public function indexFlavours()
+    {
+        return $this->respond(Flavour::all());
     }
 }
