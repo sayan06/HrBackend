@@ -24,7 +24,6 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/users/verify-otp', [AuthController::class, 'verifyOtp']);
     Route::post('/forgot-password', [PasswordResetController::class, 'sendPasswordResetMail']);
     Route::post('/password-reset', [PasswordResetController::class, 'resetPasswordByToken']);
-    Route::post('/users/on-board', [UserInformationController::class, 'onBoardUserDetails']);
     Route::get('/users/body-style', [OnboardingController::class, 'indexBodyStyle']);
     Route::post('/users/degree', [OnboardingController::class, 'indexDegree']);
     Route::post('/users/astrological-sign', [OnboardingController::class, 'indexAstrologicalSign']);

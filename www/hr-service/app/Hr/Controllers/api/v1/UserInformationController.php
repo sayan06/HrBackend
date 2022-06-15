@@ -5,6 +5,7 @@ namespace App\Hr\Controllers\api\v1;
 use App\Hr\Controllers\api\ApiController;
 use App\Hr\Models\User;
 use App\Hr\Models\UserInformation;
+use App\Hr\Models\UserInterest;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -73,7 +74,7 @@ final class UserInformationController extends ApiController
         );
     }
 
-    public function update(User $user, Request $request)
+    public function update(UserInformation $userInfo, Request $request)
     {
         $request->validate([
             'country' => 'string|max:255',
@@ -89,8 +90,6 @@ final class UserInformationController extends ApiController
             'degree_id' => 'int|min:1|max:9999999999|exists:degrees,id',
             'ethnicity_id' => 'int|min:1|max:9999999999|exists:ethnicities,id',
             'eye_color_id'  => 'int|min:1|max:9999999999|exists:eye_colors,id',
-            'personality_types' => 'array',
-            'personality_types.*.*' => 'int|min:1|max:9999999999|exists:personality_types,id',
             'alcohol_consumption_type_id' => 'int|min:1|max:9999999999|exists:alcohol_consumptions,id',
             'religion_id' => 'int|min:1|max:9999999999|exists:religions,id',
             'astrological_sign_id' => 'int|min:1|max:9999999999|exists:astrological_signs,id',
@@ -99,10 +98,6 @@ final class UserInformationController extends ApiController
             'smoker' => 'boolean',
             'kids' => 'boolean',
             'kids_requirement_type_id' => 'int|min:1|max:9999999999|exists:kids_requirement_types,id',
-            'ideal_matches' => 'array',
-            'ideal_matches.*.*' => 'int|min:1|max:9999999999|exists:ideal_matches,id',
-            'interests' => 'array',
-            'interests.*.*' => 'int|min:1|max:9999999999|exists:interests,id',
             'gender' =>  [
                 'required',
                 Rule::in([
@@ -111,20 +106,16 @@ final class UserInformationController extends ApiController
                 ]),
             ],
             'hair_color' => 'int|min:1|max:9999999999|exists:hair_colors,id',
-            'languages' => 'array',
-            'languages.*.*' => 'int|min:1|max:9999999999|exists:languages,id',
-            'questions_answers' => 'array',
-            'questions_answers.*.question_id' => 'int|min:1|max:9999999999|exists:questions_answers,id|required_with:questions_answers.*.response',
-            'questions_answers.*.response' => 'string|max:255|required_with:questions_answers.*.question_id',
-            'flavours' => 'array',
-            'flavours.*.*' => 'int|min:1|max:9999999999|exists:flavours,id',
             'is_hidden' => 'bool',
             'steps' => 'int',
         ]);
 
+        $attributes = $request->all();
+        data_set($attributes, 'user_id', $request()->user()->id);
+
         return $this->respondCreated(
             'User information updated successfully!',
-            ($this->userService->updateUserDetails($user, $request->all()))
+            ($this->userService->updateUserDetails($userInfo, $attributes))
         );
     }
 

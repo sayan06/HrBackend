@@ -4,6 +4,7 @@ namespace App\Hr\Services\Contracts;
 
 use App\Hr\Models\Role;
 use App\Hr\Models\User;
+use App\Hr\Models\UserInformation;
 
 interface UserServiceInterface
 {
@@ -18,4 +19,6 @@ interface UserServiceInterface
     public function createUserDetails(User $user, array $attributes = []);
 
     public function getLikability(User $user, array $attributes = []);
+
+    public function updateUserDetails(UserInformation $userInfo, array $attributes = []);
 }

@@ -18,4 +18,8 @@ Route::prefix('users')->group(function () {
         ->middleware('permission:update_user');
 
     Route::post('/likability', [UserInformationController::class, 'likeOrDisLikeUser']);
+
+    Route::post('/on-board', [UserInformationController::class, 'onBoardUserDetails']);
+
+    Route::put('/on-board', [UserInformationController::class, 'update']);
 });

@@ -215,6 +215,10 @@ final class UserService implements UserServiceInterface
             throw $th;
         }
     }
+    public function updateUserDetails(UserInformation $userInfo, array $attributes = [])
+    {
+        return tap($userInfo)->update($attributes);
+    }
 
     public function getLikability(User $user, array $attributes = [])
     {
