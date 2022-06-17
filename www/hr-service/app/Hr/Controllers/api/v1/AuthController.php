@@ -113,7 +113,7 @@ final class AuthController extends ApiController
 
         Mail::to($request->email)->send(new DefaultMailable($details));
 
-        return $this->respond('OTP sent successfully');
+        return $this->respondSuccess('OTP sent successfully', ['otp' => $details['body']]);
     }
 
     public function verifyOtp(Request $request)
