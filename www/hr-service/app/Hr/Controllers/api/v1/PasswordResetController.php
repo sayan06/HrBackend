@@ -33,11 +33,8 @@ final class PasswordResetController extends ApiController
         try {
             $user = $this->passwordResetService->findUser($find);
 
-            return $this->setStatusCode(200)->respond([
-                'data' => [
-                    'user_id' => $user->id,
+            return $this->respondSuccess('Token or Otp sent to your registered mail', [
                     'password_reset' => $this->passwordResetService->sendResetEmail($user),
-                ],
             ]);
         } catch (ModelNotFoundException $ex) {
             Log::error('Password reset validation error: No user found.', compact('find'));
@@ -47,9 +44,7 @@ final class PasswordResetController extends ApiController
             Log::error('Password reset validation error: Multiple users found.', compact('find'));
 
             return $this->setStatusCode(400)->respond([
-                'data' => [
                     'multiple_users' => true,
-                ],
             ]);
         }
     }

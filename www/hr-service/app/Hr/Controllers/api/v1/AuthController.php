@@ -6,6 +6,7 @@ use App\Hr\Controllers\api\ApiController;
 use App\Hr\Mail\DefaultMailable;
 use App\Hr\Models\Role;
 use App\Hr\Models\User;
+use App\Hr\Models\UserInformation;
 use App\Hr\Resources\UserResource;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Http\Request;
@@ -69,9 +70,12 @@ final class AuthController extends ApiController
             return $this->respondForbidden('User is deactivated');
         }
 
+        $loginSteps = UserInformation::where('user_id', $user->id)->get('steps');
+
         return $this->respondSuccess('Login success', [
             'user' => new UserResource($user),
             'token' => $this->userService->createAuthToken($user),
+            'steps' => $loginSteps,
         ]);
     }
 
