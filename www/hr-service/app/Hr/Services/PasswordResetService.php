@@ -99,7 +99,7 @@ final class PasswordResetService implements PasswordResetServiceInterface
     private function getUserPasswordResetData(User $user): PasswordReset
     {
         $passwordResetRecord = $this->passwordResetRepo->getByUser($user);
-        dd($passwordResetRecord);
+
         if (empty($passwordResetRecord->token)) {
             return $this->passwordResetRepo->createOrUpdateResetToken($user);
         }

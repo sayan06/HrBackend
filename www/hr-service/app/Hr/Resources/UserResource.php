@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'profile_photo_path' => $this->profile_photo_path,
             'title' => $this->title,
             'phone' => $this->phone,
+            'email_verified_at' => $this->email_verified_at,
             'disabled_at' => !empty($this->disabled_at->timestamp) ? $this->disabled_at->timestamp : null,
             'role' => new RoleResource($this->roles->first()),
         ];
