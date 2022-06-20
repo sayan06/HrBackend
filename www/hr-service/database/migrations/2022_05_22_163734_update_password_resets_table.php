@@ -18,6 +18,7 @@ class UpdatePasswordResetsTable extends Migration
         });
 
         Schema::table('password_resets', function (Blueprint $table) {
+            $table->id();
             $table->integer('user_id')->index();
             $table->integer('time_requested');
         });
@@ -31,7 +32,7 @@ class UpdatePasswordResetsTable extends Migration
     public function down()
     {
         Schema::table('password_resets', function (Blueprint $table) {
-            $table->dropColumn(['user_id', 'time_requested']);
+            $table->dropColumn(['user_id', 'time_requested', 'id']);
         });
 
         Schema::table('password_resets', function (Blueprint $table) {
