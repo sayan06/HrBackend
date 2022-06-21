@@ -21,7 +21,6 @@ use Throwable;
 
 final class PasswordResetService implements PasswordResetServiceInterface
 {
-    private user $user;
     private PasswordResetRepositoryInterface $passwordResetRepo;
 
     public function __construct(
@@ -57,13 +56,13 @@ final class PasswordResetService implements PasswordResetServiceInterface
         return $passwordResetData;
     }
 
-    public function resetPasswordByToken(string $token, string $password): void
+    public function resetPasswordByToken(string $token, string $password): User
     {
         try {
             $passwordResetData = PasswordReset::where('token', $token)->with('user')->firstOrFail();
             $this->validatePasswordResetData($passwordResetData);
 
-            $this->user = $passwordResetData->user;
+            $user = $passwordResetData->user;
         } catch (Throwable $th) {
             if (!empty($passwordResetData)) {
                 $passwordResetData->delete();
@@ -72,16 +71,18 @@ final class PasswordResetService implements PasswordResetServiceInterface
             throw $th;
         }
 
+        $password = bcrypt($password);
+
         try {
             DB::beginTransaction();
 
             $passwordResetData->delete();
 
-            $this->user->password = $password;
-            $this->user->save();
+            $user->password = $password;
+            $user->save();
 
-            $this->addPasswordHistory($password);
-            $this->deleteUserSessions();
+            $this->addPasswordHistory($user, $password);
+            $this->deleteUserSessions($user);
 
             DB::commit();
         } catch (Throwable $th) {
@@ -89,11 +90,8 @@ final class PasswordResetService implements PasswordResetServiceInterface
 
             throw $th;
         }
-    }
 
-    public function getUser(): User
-    {
-        return $this->user;
+        return $user;
     }
 
     private function getUserPasswordResetData(User $user): PasswordReset
@@ -120,7 +118,7 @@ final class PasswordResetService implements PasswordResetServiceInterface
         }
     }
 
-    private function addPasswordHistory(string $password): void
+    private function addPasswordHistory(User $user, string $password): void
     {
         $passwordReuseLimit = Config::where('name', 'password_reuse_limit')->get()->first()?->value;
 
@@ -131,10 +129,10 @@ final class PasswordResetService implements PasswordResetServiceInterface
         PasswordHistory::insert([
             'hash' => bcrypt($password),
             'created_at' => time(),
-            'user_id' => $this->user->id,
+            'user_id' => $user->id,
         ]);
 
-        $passwordHistories = PasswordHistory::where('user_id', $this->user->id)->orderByDesc('id')->get();
+        $passwordHistories = PasswordHistory::where('user_id', $user->id)->orderByDesc('id')->get();
 
         $index = 0;
         $idsToDelete = [];
@@ -151,9 +149,9 @@ final class PasswordResetService implements PasswordResetServiceInterface
         }
     }
 
-    private function deleteUserSessions(): void
+    private function deleteUserSessions(User $user): void
     {
-        $this->user->tokens()->delete();
+        $user->tokens()->delete();
     }
 
     private function createNotification(User $user): Notification

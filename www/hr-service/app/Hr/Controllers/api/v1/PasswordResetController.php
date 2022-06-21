@@ -34,7 +34,7 @@ final class PasswordResetController extends ApiController
             $user = $this->passwordResetService->findUser($find);
 
             return $this->respondSuccess('Token or Otp sent to your registered mail', [
-                    'password_reset' => $this->passwordResetService->sendResetEmail($user),
+                'password_reset' => $this->passwordResetService->sendResetEmail($user),
             ]);
         } catch (ModelNotFoundException $ex) {
             Log::error('Password reset validation error: No user found.', compact('find'));
@@ -44,7 +44,7 @@ final class PasswordResetController extends ApiController
             Log::error('Password reset validation error: Multiple users found.', compact('find'));
 
             return $this->setStatusCode(400)->respond([
-                    'multiple_users' => true,
+                'multiple_users' => true,
             ]);
         }
     }
@@ -53,22 +53,19 @@ final class PasswordResetController extends ApiController
     {
         $request->validate([
             'password' => 'required|string',
-            'token' => 'required|string|size:32',
+            'token' => 'required|string|size:4',
         ]);
 
         try {
             $password = $request->input('password');
             $token = $request->input('token');
-            $this->passwordResetService->resetPasswordByToken($token, $password);
 
-            $user = $this->passwordResetService->getUser();
-
-            return $this->setStatusCode(200)->respond([
-                'user' => $user,
+            return $this->respondSuccess('Password Reset Successful!', [
+                'user' => $this->passwordResetService->resetPasswordByToken($token, $password),
             ]);
         } catch (NotFoundResourceException) {
             return $this->respondNotFound('Invalid token.');
-        } catch (BadRequestException|ValidationException $ex) {
+        } catch (BadRequestException | ValidationException $ex) {
             return $this->respondBadRequest($ex->getMessage());
         }
     }

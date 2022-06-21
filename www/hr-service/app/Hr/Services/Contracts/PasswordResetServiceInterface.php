@@ -11,7 +11,5 @@ interface PasswordResetServiceInterface
 
     public function sendResetEmail(User $user): PasswordReset;
 
-    public function resetPasswordByToken(string $token, string $password): void;
-
-    public function getUser(): User;
+    public function resetPasswordByToken(string $token, string $password): User;
 }
