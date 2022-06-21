@@ -6,7 +6,7 @@ use App\Hr\Controllers\api\ApiController;
 use App\Hr\Models\Likability;
 use App\Hr\Models\User;
 use App\Hr\Models\UserInformation;
-use App\Hr\Models\UserInterest;
+use App\Hr\Resources\UserResource;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -152,5 +152,22 @@ final class UserInformationController extends ApiController
             'likes' => $likeCount,
             'dislikes' => $disLikeCount,
         ]);
+    }
+
+    public function getLikedUsers(User $user)
+    {
+        $likedUserList = Likability::where('user_id', $user->id)->where('likability', 1)->pluck('liked_by_id');
+        $users = User::whereIn('id', $likedUserList)->get();
+
+        return $this->respondSuccess('Liked Users', UserResource::collection($users));
+    }
+
+    public function getDisLikedUsers(User $user)
+    {
+        $likedUserList = Likability::where('user_id', $user->id)->where('likability', 0)->pluck('liked_by_id');
+
+        $users = User::whereIn('id', $likedUserList)->get();
+
+        return $this->respondSuccess('Disliked Users', UserResource::collection($users));
     }
 }

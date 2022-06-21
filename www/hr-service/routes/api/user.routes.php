@@ -15,6 +15,10 @@ Route::prefix('users')->group(function () {
 
     Route::get('/user-likability/{user}', [UserInformationController::class, 'getLikedDislikedUsers']);
 
+    Route::get('/liked-by/{user}', [UserInformationController::class, 'getLikedUsers']);
+
+    Route::get('/disliked-by/{user}', [UserInformationController::class, 'getDisLikedUsers']);
+
     Route::put('/{user}/change-password', [UserController::class, 'changePassword'])
         ->middleware('permission:change_user_password');
 
