@@ -51,7 +51,6 @@ final class UserInformationController extends ApiController
             'interests' => 'array',
             'interests.*.*' => 'int|min:1|max:9999999999|exists:interests,id',
             'gender' =>  [
-                'required',
                 Rule::in([
                     UserInformation::GENDER_FEMALE,
                     UserInformation::GENDER_MALE,
@@ -102,7 +101,6 @@ final class UserInformationController extends ApiController
             'kids' => 'boolean',
             'kids_requirement_type_id' => 'int|min:1|max:9999999999|exists:kids_requirement_types,id',
             'gender' =>  [
-                'required',
                 Rule::in([
                     UserInformation::GENDER_FEMALE,
                     UserInformation::GENDER_MALE,
