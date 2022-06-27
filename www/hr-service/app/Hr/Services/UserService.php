@@ -15,6 +15,7 @@ use App\Hr\Models\UserQuestionAnswer;
 use App\Hr\Repositories\Contracts\UserRepositoryInterface;
 use App\Hr\Services\Contracts\UserServiceInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Throwable;
 
@@ -151,9 +152,10 @@ final class UserService implements UserServiceInterface
         if (!empty($questions)) {
             $questionsData = [];
             foreach ($questions as $question) {
+                Log::alert('$question->id');
                 $questionsData [] = [
-                    'question_id' => $question->id,
-                    'response' => $question->response,
+                    'question_id' => $question['question_id'],
+                    'response' => $question['response'],
                     'user_id' => $user->id,
                 ];
             }

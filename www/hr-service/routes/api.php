@@ -3,7 +3,6 @@
 use App\Hr\Controllers\api\v1\AuthController;
 use App\Hr\Controllers\api\v1\OnboardingController;
 use App\Hr\Controllers\api\v1\PasswordResetController;
-use App\Hr\Controllers\api\v1\UserInformationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +34,11 @@ Route::prefix('v1')->group(function () {
     Route::get('/users/hair-colors', [OnboardingController::class, 'indexHairColor']);
     Route::get('/users/questions', [OnboardingController::class, 'indexQuestions']);
     Route::get('/users/flavours', [OnboardingController::class, 'indexFlavours']);
+    Route::get('/users/interests', [OnboardingController::class, 'indexInterests']);
+    Route::get('/users/languages', [OnboardingController::class, 'indexLanguages']);
+    Route::get('/users/ideal-matches', [OnboardingController::class, 'indexIdealMatches']);
+    Route::get('/users/kids-requirement', [OnboardingController::class, 'indexKidsRequirementTypes']);
+    Route::get('/users/personalities', [OnboardingController::class, 'indexPersonalities']);
 });
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {

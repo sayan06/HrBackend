@@ -16,14 +16,17 @@ class UserInformation extends BaseModel
 
     protected $table = 'user_informations';
 
+    protected $dateFormat = 'U';
 
     public const SORTABLE = [];
 
     public const FILTERABLES = [];
 
-    protected $dateFormat = 'U';
-
-    protected $casts = [];
+    protected $casts = [
+        'created_at' => 'timestamp',
+        'updated_at' => 'timestamp',
+        'deleted_at' => 'timestamp',
+    ];
 
     protected $fillable = [
         'country',

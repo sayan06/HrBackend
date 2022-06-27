@@ -60,7 +60,7 @@ final class UserInformationController extends ApiController
             'languages' => 'array',
             'languages.*.*' => 'int|min:1|max:9999999999|exists:languages,id',
             'questions_answers' => 'array',
-            'questions_answers.*.question_id' => 'int|min:1|max:9999999999|exists:questions_answers,id',
+            'questions_answers.*.question_id' => 'int|min:1|max:9999999999|exists:questions,id',
             'questions_answers.*.response' => 'string|max:255',
             'flavours' => 'array',
             'flavours.*.*' => 'int|min:1|max:9999999999|exists:flavours,id',

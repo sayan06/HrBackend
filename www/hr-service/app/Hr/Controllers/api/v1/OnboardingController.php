@@ -11,7 +11,12 @@ use App\Hr\Models\Ethnicity;
 use App\Hr\Models\EyeColor;
 use App\Hr\Models\Flavour;
 use App\Hr\Models\HairColor;
+use App\Hr\Models\IdealMatch;
+use App\Hr\Models\Interest;
+use App\Hr\Models\KidRequirementType;
+use App\Hr\Models\Language;
 use App\Hr\Models\MaritalStatus;
+use App\Hr\Models\Personality;
 use App\Hr\Models\Question;
 use App\Hr\Models\Religion;
 
@@ -70,5 +75,30 @@ final class OnboardingController extends ApiController
     public function indexFlavours()
     {
         return $this->respond(Flavour::all());
+    }
+
+    public function indexInterests()
+    {
+        return $this->respond(Interest::all());
+    }
+
+    public function indexLanguages()
+    {
+        return $this->respond(Language::all());
+    }
+
+    public function indexIdealMatches()
+    {
+        return $this->respond(IdealMatch::all());
+    }
+
+    public function indexKidsRequirementTypes()
+    {
+        return $this->respond(KidRequirementType::all());
+    }
+
+    public function indexPersonalities()
+    {
+        return $this->respond(Personality::all());
     }
 }
