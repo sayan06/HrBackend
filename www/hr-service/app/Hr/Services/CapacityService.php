@@ -6,7 +6,6 @@ use App\Hr\Models\Ball;
 use App\Hr\Models\Bucket;
 use App\Hr\Services\Contracts\CapacityServiceInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Throwable;
 
 final class CapacityService implements CapacityServiceInterface
 {
@@ -40,10 +39,6 @@ final class CapacityService implements CapacityServiceInterface
             ]);
         }
 
-        if ($capacity > $bucketCapacity){
-            throw new BadRequestException('Ball cannot be allocated');
-        }
-
         $updatedBucketData = [];
 
         foreach ($emptyBucketVolumeCollection as $emptyVolumeBucket) {
@@ -73,6 +68,10 @@ final class CapacityService implements CapacityServiceInterface
         }
 
         Bucket::upsert($updatedBucketData, ['id','name'], ['volume', 'occupied_volume']);
+
+        if ($capacity>0) {
+            throw new BadRequestException('Balls partially allocated');
+        }
 
         return $updatedBucketData;
     }

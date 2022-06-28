@@ -1,8 +1,7 @@
 # Steps to setup hr-infra
 
-- Clone the repository.
+- Copy the repository.
 - Run command `sh build.sh dev` in the console for dev deployment.
-- Run command `sh build.sh prod` in the console for production deployment.
 - The `www` folder should be created then clone `hr-service` projects from their respective repositories inside it.
 
 ### Steps to setup hr-service
