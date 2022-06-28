@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_ideal_matches', function (Blueprint $table) {
-            $table->integer('ideal_match_id');
-            $table->integer('user_id');
+        Schema::create('buckets', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->double('volume');
+            $table->double('occupied_volume')->default(0);
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_ideal_matches');
+        Schema::dropIfExists('buckets');
     }
 };
